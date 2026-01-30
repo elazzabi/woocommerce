@@ -13,6 +13,10 @@
 			"url": "lib"
 		},
 		{
+			"type": "vcs",
+			"url": "https://github.com/automattic/woocommerce-subscriptions-core.git"
+		},
+		{
 			"type": "path",
 			"url": "../../packages/php/monorepo-plugin",
 			"options": {
@@ -50,12 +54,14 @@
 		"automattic/jetpack-config": "3.0.0",
 		"automattic/jetpack-connection": "^6.11.1",
 		"automattic/jetpack-constants": "^3.0.1",
+		"automattic/jetpack-sync": "4.24.1",
 		"composer/installers": "^1.9",
 		"maxmind-db/reader": "^1.11",
 		"opis/json-schema": "*",
 		"woocommerce/action-scheduler": "3.9.3",
 		"woocommerce/blueprint": "*",
 		"woocommerce/email-editor": "*",
+		"woocommerce/subscriptions-core": "6.7.1",
 		"wordpress/abilities-api": "^0.4.0",
 		"wordpress/mcp-adapter": "^0.3.0"
 	},
@@ -168,6 +174,7 @@
 		"installer-paths": {
 			"packages/{$name}": [
 				"woocommerce/action-scheduler",
+				"woocommerce/subscriptions-core",
 				"woocommerce/email-editor",
 				"woocommerce/blueprint"
 			]
