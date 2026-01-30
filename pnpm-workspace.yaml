@@ -2,6 +2,7 @@ packages:
     - 'packages/js/*'
     - 'packages/php/*'
     - 'plugins/*'
+    - 'plugins/woocommerce/includes/woopayments'
     - 'plugins/woocommerce/client/admin'
     - 'plugins/woocommerce/client/blocks'
     - 'plugins/woocommerce/client/legacy'
