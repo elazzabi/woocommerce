@@ -8,10 +8,12 @@
 /build/
 /changelog/
 /node_modules/
+/includes/woopayments/node_modules/
 /patches/
 /playwright-report/
 /storybook/
 /tests/
+/includes/woopayments/tests/
 /test-results/
 /vendor/*/*/tests
 /packages/*/tests
@@ -39,6 +41,8 @@ phpunit-*.xml.dist
 postcss.config.js
 project.json
 README.md
+includes/woopayments/README.md
+includes/woopayments/SECURITY.md
 renovate.json
 tsconfig.*
 webpack.config.js
@@ -48,3 +52,10 @@ webpack.config.js
 phpstan.neon
 phpstan-baseline.neon
 /php-stubs/
+/includes/woopayments/.github/
+/includes/woopayments/.husky/
+/includes/woopayments/docker/
+/includes/woopayments/docs/
+/includes/woopayments/changelog/
+/includes/woopayments/bin/
+/includes/woopayments/tasks/
