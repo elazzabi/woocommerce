@@ -1,11 +1,33 @@
 <?php
+declare( strict_types=1 );
 
 use Automattic\WooCommerce\Admin\Notes\Note;
+use Automattic\WooCommerce\Internal\Features\FeaturesController;
 
 /**
  * Class WC_Install_Test.
  */
 class WC_Install_Test extends \WC_Unit_Test_Case {
+	/**
+	 * Reset the WooPayments core feature option after each test.
+	 */
+	public function tearDown(): void {
+		parent::tearDown();
+		delete_option( 'woocommerce_feature_woopayments_core_enabled' );
+	}
+
+	/**
+	 * Ensure WooPayments core is enabled for new installs.
+	 */
+	public function test_enables_woopayments_core_on_new_install(): void {
+		delete_option( 'woocommerce_feature_woopayments_core_enabled' );
+
+		\WC_Install::enable_woopayments_core();
+
+		$this->assertSame( 'yes', get_option( 'woocommerce_feature_woopayments_core_enabled' ) );
+		$features_controller = wc_get_container()->get( FeaturesController::class );
+		$this->assertTrue( $features_controller->feature_is_enabled( 'woopayments_core' ) );
+	}
 
 	/**
 	 * Test if verify base table can detect missing table and adds/remove a notice.

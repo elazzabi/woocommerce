@@ -360,6 +360,7 @@ class WC_Install {
 		add_action( 'woocommerce_newly_installed', array( __CLASS__, 'enable_email_improvements_for_newly_installed' ), 20 );
 		add_action( 'woocommerce_newly_installed', array( __CLASS__, 'enable_customer_stock_notifications_signups' ), 20 );
 		add_action( 'woocommerce_newly_installed', array( __CLASS__, 'enable_analytics_scheduled_import' ), 20 );
+		add_action( 'woocommerce_newly_installed', array( __CLASS__, 'enable_woopayments_core' ), 20 );
 		add_action( 'woocommerce_updated', array( __CLASS__, 'enable_email_improvements_for_existing_merchants' ), 20 );
 		add_action( 'woocommerce_run_update_callback', array( __CLASS__, 'run_update_callback' ) );
 		add_action( 'woocommerce_update_db_to_current_version', array( __CLASS__, 'update_db_version' ) );
@@ -402,6 +403,16 @@ class WC_Install {
 			 * @since 9.2.0
 			 */
 			add_option( self::INITIAL_INSTALLED_VERSION, WC()->version, '', false );
+		}
+	}
+
+	/**
+	 * Enable WooPayments core for new installs.
+	 */
+	public static function enable_woopayments_core() {
+		$features_controller = wc_get_container()->get( FeaturesController::class );
+		if ( $features_controller instanceof FeaturesController ) {
+			$features_controller->change_feature_enable( 'woopayments_core', true );
 		}
 	}
 

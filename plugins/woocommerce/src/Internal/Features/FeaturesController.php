@@ -603,6 +603,18 @@ class FeaturesController {
 				'skip_compatibility_checks'    => true,
 				'default_plugin_compatibility' => FeaturePluginCompatibility::COMPATIBLE,
 			),
+			'woopayments_core'                   => array(
+				'name'                         => __( 'WooPayments core gateway', 'woocommerce' ),
+				'description'                  => __(
+					'Enable WooPayments as a core payment gateway.',
+					'woocommerce'
+				),
+				'enabled_by_default'           => false,
+				'disable_ui'                   => false,
+				'is_experimental'              => true,
+				'skip_compatibility_checks'    => true,
+				'default_plugin_compatibility' => FeaturePluginCompatibility::COMPATIBLE,
+			),
 		);
 
 		if ( ! $tracking_enabled ) {
