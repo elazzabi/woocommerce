@@ -1,0 +1,51 @@
+.woopay-save-new-user-container {
+	.save-details {
+		.wc-block-components-text-input input:-webkit-autofill {
+			padding: 1.5em 0.5em 1.5em 0.5em;
+		}
+	}
+
+	.save-details-header {
+		display: flex;
+		align-items: flex-start;
+		gap: $gap-small;
+		position: relative;
+
+		> div {
+			flex: 1;
+		}
+
+		label {
+			display: block;
+			margin: 0 !important;
+			padding: 0 0 0 27px;
+			text-indent: -27px;
+
+			.save-details-checkbox:not( .wc-block-components-checkbox__input ) {
+				margin-right: 12px;
+			}
+		}
+
+		.wc-block-components-checkbox {
+			margin-top: 0;
+			flex: 1;
+
+			label {
+				display: flex !important;
+				align-items: flex-start;
+				padding: 0;
+				text-indent: 0;
+			}
+
+			span {
+				@include breakpoint( '>960px' ) {
+					margin-right: 1.25rem;
+				}
+			}
+		}
+	}
+
+	h2 {
+		margin-bottom: 4px;
+	}
+}

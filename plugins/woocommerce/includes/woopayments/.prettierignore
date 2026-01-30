@@ -1,0 +1,17 @@
+bin
+dist
+docker
+node_modules
+release
+vendor
+wordpress-org-assets
+
+tests/e2e/docker
+tests/e2e/deps
+tests/qit/test-package
+
+docs/dependencies.md
+docs/metadata.md
+docs/renovate.md
+
+includes/core/server/README.md

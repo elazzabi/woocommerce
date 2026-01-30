@@ -1,0 +1,72 @@
+name: PHP linting and tests
+
+on:
+  pull_request:
+  merge_group:
+
+env:
+  WP_VERSION:        latest
+  WC_MIN_SUPPORTED_VERSION: '7.6.0'
+  PHP_MIN_SUPPORTED_VERSION: '7.3'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name:    PHP linting
+    runs-on: ubuntu-latest
+    steps:
+      # clone the repository
+      - uses: actions/checkout@v4
+      # enable dependencies caching
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/composer/
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.json') }}-${{ hashFiles('composer.lock') }}
+      # setup PHP, but without debug extensions for reasonable performance
+      - name: "Set up PHP"
+        uses: ./.github/actions/setup-php
+      # install dependencies and run linter
+      - run: composer self-update && composer install --no-progress --ignore-platform-req=php && ./vendor/bin/phpcs --standard=phpcs.xml.dist $(git ls-files | grep .php$) && composer run phpstan
+
+  generate-test-matrix:
+    name: "Generate the matrix for php tests dynamically"
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.generate_matrix.outputs.matrix }}
+    steps:
+      - name: "Generate matrix"
+        id: generate_matrix
+        run: |
+          # PHP 7.3 requires Gutenberg 22.3.0 (last version supporting PHP 7.3)
+          # PHP 7.4+ can use latest Gutenberg
+          echo "matrix={\"php\":[\"7.4\"],\"gutenberg\":[\"latest\"],\"include\":[{\"php\":\"$PHP_MIN_SUPPORTED_VERSION\",\"gutenberg\":\"22.3.0\"}]}" >> $GITHUB_OUTPUT
+
+  test:
+    name: PHP testing
+    needs: generate-test-matrix
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix: ${{ fromJSON(needs.generate-test-matrix.outputs.matrix) }}
+    steps:
+      # clone the repository
+      - uses: actions/checkout@v4
+      # enable dependencies caching
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/composer/
+          key:  ${{ runner.os }}-composer-${{ hashFiles('composer.json') }}-${{ hashFiles('composer.lock') }}
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools:       composer
+          coverage:    xdebug2
+      # run CI checks
+      - run: bash bin/run-ci-tests.bash
+        env:
+          WC_VERSION: ${{ env.WC_MIN_SUPPORTED_VERSION }}
+          GUTENBERG_VERSION: ${{ matrix.gutenberg }}

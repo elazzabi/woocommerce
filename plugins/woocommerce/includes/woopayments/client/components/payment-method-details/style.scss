@@ -1,0 +1,26 @@
+/** @format **/
+
+.payment-method-details {
+	gap: 5px;
+
+	.payment-method__icon {
+		width: 28px;
+		width: 1.75rem;
+	}
+
+	.payment-method__brand {
+		width: 28px;
+		width: 1.75rem;
+		height: 17px;
+		height: 1.063rem;
+		margin-bottom: -4px;
+		margin-bottom: -0.25rem;
+		margin-top: 1px;
+	}
+}
+
+@media screen and ( max-width: 782px ) {
+	.payment-method-details__brand-tooltip {
+		display: none;
+	}
+}

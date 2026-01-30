@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "components/*": ["client/components/*"],
+      "utils/*": ["client/utils/*"]
+    }
+  },
+  "exclude": [
+    "assets",
+    "bin",
+    "dist",
+    "docker",
+    "includes",
+    "node_modules",
+    "vendor",
+    "tests/e2e/docker",
+    "tests/e2e/deps",
+  ]
+}

@@ -1,0 +1,352 @@
+.express-checkout-settings {
+	&__breadcrumbs {
+		margin-bottom: 40px;
+	}
+
+	&__option-muted-text {
+		color: #757575;
+	}
+
+	&__cta-selection {
+		.components-base-control__label {
+			// hack until the `hideLabelFromVision` is fixed for radio controls in Gutenberg
+			display: none;
+		}
+	}
+
+	&__preview {
+		border: 1px dashed #ddd;
+		box-sizing: border-box;
+		border-radius: 3px;
+		background-color: #f0f0f0;
+		padding: 16px;
+	}
+
+	&__icons {
+		display: flex;
+		align-items: flex-start;
+	}
+
+	&__icon {
+		display: flex;
+		width: 64px;
+		height: 40px;
+		margin: 1px 17px 1px 1px; // 1px to accommodate for box-shadow
+
+		svg {
+			display: inline-block;
+		}
+	}
+}
+
+.components-radio-control__input[type='radio']:checked::before {
+	box-sizing: border-box;
+}
+
+.woopay-settings {
+	&__badge {
+		background-color: $studio-gray-5;
+		padding: 0 8px;
+		border-radius: 2px;
+		font-size: 12px;
+		line-height: 20px;
+		margin-left: 4px;
+	}
+	&__global-theme-label {
+		display: inline-flex;
+		align-items: center;
+	}
+
+	&__update-store-logo {
+		display: flex;
+		justify-content: space-between;
+
+		.components-base-control__field {
+			margin-bottom: 0;
+		}
+
+		.components-button.is-link {
+			color: #007cba;
+			text-decoration: none;
+		}
+
+		.delete-uploaded-file-button {
+			color: #757575;
+		}
+
+		&.has-file {
+			border: 1px solid #f0f0f0;
+			padding: 8px;
+
+			.components-form-file-upload {
+				display: none;
+			}
+		}
+
+		img {
+			margin-top: 0 !important;
+		}
+	}
+
+	&__appearance-card-settings,
+	&__appearance-card-preview {
+		background-color: $studio-white;
+		box-shadow: 0 0 0 1px #0000001a;
+	}
+
+	&__appearance-card-preview {
+		margin-top: 1rem;
+	}
+
+	&__preview {
+		position: relative;
+
+		&-fade {
+			position: absolute;
+			bottom: 0;
+			height: 45px;
+			width: 100%;
+			background: linear-gradient(
+				180deg,
+				rgba( 255, 255, 255, 0 ) 0%,
+				$studio-white 100%
+			);
+		}
+
+		.preview-layout {
+			border: 1px solid #ddd;
+			border-radius: $grid-unit-05;
+			box-shadow: 0 2px 6px 0 rgba( 0, 0, 0, 0.05 );
+			padding: 0;
+			position: relative;
+
+			&__v-spacer {
+				background-color: #0000;
+				width: 100%;
+			}
+
+			&__preview-button {
+				position: absolute;
+				top: 0.3125rem;
+				right: 0.3125rem;
+				padding: 0.125rem 0.5rem;
+				border-radius: 0.125rem;
+				background-color: #3858e9;
+				color: $studio-white;
+				line-height: 1rem;
+				font-size: 0.75rem;
+				font-weight: 400;
+				z-index: 1;
+			}
+
+			&__store-header {
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				position: relative;
+
+				.header-text {
+					color: $studio-gray-60;
+					font-size: 1.125rem;
+					letter-spacing: 0.1rem;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+
+					@media screen and ( max-width: $break-mobile ) {
+						// The chevronLeft icon is 5.66% from the left and
+						// has a width of 1.5rem. This padding is to ensure
+						// the text doesn't overlap with the icon.
+						padding-left: calc( 5.66% + 1.5rem );
+					}
+				}
+			}
+
+			&__chevron-left {
+				position: absolute;
+				left: 5.66%;
+				top: 0;
+			}
+
+			&__container {
+				width: 100%;
+			}
+
+			&__body {
+				width: 100%;
+			}
+
+			&__hr {
+				color: $studio-gray-5;
+				margin: 0;
+				border-bottom: 0;
+			}
+
+			&__left-column {
+				width: 59.08%;
+			}
+
+			&__contact-section {
+				border: 0.03125rem solid #11111121;
+				border-radius: 0.25rem;
+			}
+
+			&__contact-field {
+				padding: 0.5rem;
+
+				&:not( :last-child ) {
+					border-bottom: 0.03125rem solid #11111121;
+				}
+			}
+
+			&__right-column {
+				width: 35.59%;
+			}
+
+			&__columns-container {
+				padding: 0 3.797% 0 3.797%;
+				display: flex;
+				justify-content: space-between;
+			}
+
+			&__section-header {
+				font-weight: 500;
+				font-size: 0.5rem;
+				color: $studio-gray-80;
+				line-height: 0.74669rem;
+				letter-spacing: 0.01rem;
+				display: flex;
+				justify-content: space-between;
+			}
+
+			&__loading-box {
+				background-color: $studio-gray-0;
+				border-radius: 0.25rem;
+				width: 100%;
+			}
+
+			&__text-box {
+				width: 100%;
+				font-size: 0.625rem;
+				color: $studio-gray-50;
+				text-align: center;
+				font-weight: 400;
+				line-height: 120%;
+				overflow: hidden;
+			}
+
+			&__shortcode-link {
+				color: $studio-woocommerce-purple-60;
+			}
+
+			&__checkout-button {
+				background-color: $studio-woocommerce-purple-40;
+				border-radius: 0.25rem;
+				align-items: center;
+				display: flex;
+				justify-content: center;
+
+				color: $studio-white;
+				font-size: 0.625em;
+				font-weight: 600;
+				line-height: 0.56rem;
+				letter-spacing: 0.0125rem;
+			}
+		}
+	}
+}
+
+.wcpay-express-checkout__enable {
+	.payment-request-settings__location {
+		margin: 0 0 0 24px;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 8px;
+	}
+	.wcpay-payment-request-settings__enable,
+	.wcpay-woopay-settings__enable {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 12px;
+
+		// Override the margin-bottom from settings-section.scss
+		.components-radio-control:not( :last-child ),
+		.components-base-control:not( :last-child ) {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.woopay-settings--appearance {
+	background-color: #0000 !important;
+	box-shadow: none !important;
+}
+
+.payment-method-settings {
+	&__option-help-text {
+		color: #757575;
+		margin-bottom: 1em;
+	}
+
+	&__preview {
+		padding: 24px;
+		border: 1px solid rgba( 25, 23, 17, 0.3 );
+		border-radius: 4px;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		gap: 12px;
+
+		@media screen and ( max-width: 782px ) {
+			flex-wrap: wrap;
+
+			& > * {
+				display: block;
+				margin-top: 14px;
+			}
+
+			& > *:first-child {
+				margin-top: 0;
+			}
+		}
+
+		&[data-theme='light'] {
+			background: #2b2b2b;
+		}
+		&[data-theme='light-outline'] {
+			background: #f0f0f0;
+		}
+
+		& > div {
+			margin: 4px;
+		}
+	}
+
+	&__border-radius {
+		display: flex;
+		gap: $gap;
+		margin-block-end: 0;
+
+		.components-base-control {
+			margin-bottom: 0 !important;
+		}
+
+		&__slider {
+			flex-grow: 1;
+		}
+
+		&__number-control {
+			&__suffix {
+				padding-inline: $gap-smaller;
+			}
+		}
+	}
+}
+
+.components-notice {
+	&__content {
+		display: flex;
+	}
+}

@@ -1,0 +1,36 @@
+name: Check changelog
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - 'release/**'
+    paths-ignore:
+      - '.github/**'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  check-changelog:
+    name:    Check changelog
+    runs-on: ubuntu-latest
+    steps:
+      # clone the repository
+      - uses: actions/checkout@v4
+      # enable dependencies caching
+      - name: Add composer to cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/composer/
+          key:  ${{ runner.os }}-composer-${{ hashFiles('composer.json') }}-${{ hashFiles('composer.lock') }}
+      # setup PHP, but without debug extensions for reasonable performance
+      - name: "Set up PHP"
+        uses: ./.github/actions/setup-php
+      # Install composer packages.
+      - run: composer self-update && composer install --no-progress --ignore-platform-req=php
+      # Fetch the target branch before running the check.
+      - name: Fetch the target origin branch
+        run: git fetch origin $GITHUB_BASE_REF
+      # Check if any changelog file is added when comparing the current branch vs the target branch.
+      - name: Check changelog
+        run: bash bin/check-changelog.sh origin/$GITHUB_BASE_REF HEAD

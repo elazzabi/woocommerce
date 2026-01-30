@@ -1,0 +1,31 @@
+.woocommerce-timeline .woocommerce-timeline-item {
+	&__body {
+		.fee-breakdown-list,
+		.discount-split-list {
+			margin-left: 16px;
+			line-height: 1.5;
+		}
+
+		.fee-breakdown-list {
+			list-style-type: disc;
+		}
+
+		.discount-split-list {
+			list-style-type: circle;
+		}
+	}
+
+	&__headline svg {
+		// Fraud outcome colors
+		&.is-fraud-outcome-review {
+			background: #d67709;
+		}
+	}
+
+	.fraud-outcome-ruleset-item + .fraud-outcome-ruleset-item {
+		color: #50575e;
+		font-size: 14px;
+		line-height: 20px;
+		margin-top: 16px;
+	}
+}

@@ -1,0 +1,35 @@
+/** @format */
+/**
+ * External dependencies
+ */
+import React from 'react';
+import CrossCircleIcon from 'gridicons/dist/cross-circle';
+import clsx from 'clsx';
+
+/**
+ * Internal dependencies
+ */
+import './styles.scss';
+
+const PaymentDeleteIllustration: React.FunctionComponent< {
+	hasBorder?: boolean;
+	icon?: ReactImgFuncComponent;
+} > = ( { hasBorder, icon: Icon = () => null } ): JSX.Element => {
+	return (
+		<div className="payment-delete-illustration__wrapper">
+			<div className="payment-delete-illustration__illustrations">
+				<Icon
+					className={ clsx(
+						'payment-delete-illustration__payment-icon',
+						{
+							'has-border': hasBorder,
+						}
+					) }
+				/>
+				<CrossCircleIcon className="payment-delete-illustration__payment-cross-icon" />
+			</div>
+		</div>
+	);
+};
+
+export default PaymentDeleteIllustration;

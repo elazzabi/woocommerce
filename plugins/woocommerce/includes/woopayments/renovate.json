@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "patch": {
+    "automerge": true
+  },
+  "pin": {
+    "automerge": true
+  },
+  "rebaseWhen": "conflicted",
+  "schedule": [
+    "before 3am on Sunday"
+  ]
+}

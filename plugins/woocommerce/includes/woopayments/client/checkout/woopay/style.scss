@@ -1,0 +1,188 @@
+@import './express-button/style';
+/* stylelint-disable selector-id-pattern */
+#contact_details {
+	float: none;
+}
+
+#contact_details + #customer_details {
+	display: block;
+}
+/* stylelint-enable selector-id-pattern */
+
+#contact-fields,
+.woopay-billing-email {
+	.wc-block-components-text-input,
+	.woocommerce-input-wrapper {
+		display: inline-block;
+		position: relative;
+		width: 100%;
+
+		.wc-block-components-spinner {
+			right: 10px;
+			width: 24px;
+		}
+	}
+}
+
+/* Fix for address form email field spinner alignment */
+.wc-block-components-address-form__email {
+	position: relative;
+
+	.wc-block-components-spinner {
+		/* Override the base style's top/left: initial */
+		top: 50%;
+		left: auto;
+		right: 10px;
+		width: 24px;
+		height: 24px;
+		transform: translateY( -50% );
+	}
+}
+
+.woopay-login-session-iframe {
+	width: 100%;
+	height: 100vh;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate( -50%, -50% );
+	z-index: 355000;
+	border: 0;
+	background: #fff;
+	visibility: hidden;
+	&.open {
+		transition: top 500ms;
+		visibility: visible;
+	}
+}
+
+@media screen and ( min-width: 768px ) {
+	.woopay-login-session-iframe-wrapper {
+		position: fixed;
+		background: rgba( 117, 117, 117, 0.6 );
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		content: ' ';
+		display: block;
+		z-index: 355000;
+
+		.woopay-login-session-iframe {
+			transition: none;
+			height: 90vh;
+			max-height: 520px;
+			position: absolute;
+			max-width: 374px;
+			border-radius: 8px;
+		}
+	}
+}
+
+.woopay-otp-iframe {
+	transition: top 500ms;
+	width: 100%;
+	height: 100dvh; /* stylelint-disable-line unit-no-unknown */
+	position: fixed;
+	top: 100%;
+	left: 0;
+	z-index: 355000;
+	border: 0;
+	background: #fff;
+	&.open {
+		top: 0;
+	}
+}
+
+.woopay-otp-iframe-wrapper {
+	.arrow {
+		position: fixed;
+		top: 100%;
+	}
+}
+
+@media screen and ( min-width: 768px ) {
+	.woopay-otp-iframe-wrapper {
+		position: fixed;
+		background: rgba( 117, 117, 117, 0.6 );
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		content: ' ';
+		display: block;
+		z-index: 355000;
+
+		.woopay-otp-iframe {
+			transition: none;
+			height: 90vh;
+			max-height: 650px;
+			position: absolute;
+			max-width: 374px;
+			border-radius: 8px;
+			right: 50px;
+			left: auto;
+		}
+
+		.arrow {
+			position: absolute;
+			right: calc( 15px / 2 );
+			background: transparent;
+			width: 0;
+			height: 0;
+			z-index: 355001;
+			border-top: 15px solid transparent;
+			border-bottom: 15px solid transparent;
+			border-right: 15px solid #fff;
+		}
+	}
+}
+
+@keyframes spinner__animation {
+	0% {
+		animation-timing-function: cubic-bezier(
+			0.5856,
+			0.0703,
+			0.4143,
+			0.9297
+		);
+		transform: rotate( 0deg );
+	}
+	100% {
+		transform: rotate( 360deg );
+	}
+}
+
+/**
+ * Sourced from https://github.com/woocommerce/woocommerce-blocks/blob/4dfe904f761423c1ac494f0d6319c602965b5efe/assets/js/base/components/spinner/style.scss.
+ * Depending on the wc-blocks version, these styles are not loaded, so they need to be included here.
+ */
+.wc-block-components-spinner {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	color: inherit;
+	box-sizing: content-box;
+	text-align: center;
+	font-size: 1.25em;
+	top: initial;
+	left: initial;
+
+	&::after {
+		content: ' ';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin: -0.5em 0 0 -0.5em;
+		width: 1em;
+		height: 1em;
+		box-sizing: border-box;
+		transform-origin: 50% 50%;
+		transform: translateZ( 0 ) scale( 0.5 );
+		backface-visibility: hidden;
+		border-radius: 50%;
+		border: 0.2em solid currentColor;
+		border-left-color: transparent;
+		animation: spinner__animation 1s infinite linear;
+	}
+}

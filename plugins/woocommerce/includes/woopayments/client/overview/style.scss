@@ -1,0 +1,88 @@
+@import '@woocommerce/experimental/build-style/style.css';
+.woocommerce-inbox-message__wrapper {
+	.woocommerce-inbox-message__content {
+		padding-bottom: 24px;
+	}
+	.woocommerce-inbox-message__actions {
+		padding-top: 16px;
+	}
+}
+
+// Adapted from woocommerce-admin:client/homescreen/style.scss
+.wcpay-task-list.woocommerce-experimental-list {
+	position: relative;
+
+	.woocommerce-experimental-list__item {
+		position: relative;
+	}
+
+	.woocommerce-task-list__item[data-key^='dispute-resolution-task'] {
+		// Hide the dispute resolution task tooltip / popover as it is irrelevant.
+		.components-popover {
+			display: none;
+		}
+
+		// Style non-urgent dispute tasks as yellow, keeping the level-1 exclamation icon.
+		&:not( [data-urgent='true'] ) {
+			.gridicons-notice-outline {
+				fill: #f0b849;
+			}
+			&::before {
+				background-color: #f0b849;
+			}
+		}
+	}
+}
+
+.wcpay-overview {
+	> .components-notice {
+		margin: 24px 0;
+	}
+
+	// Gutenberg compatibility adjustments. The component changed its classes and
+	// styling in @wordpress/components 19.11.0. We're currently using 11.1.5.
+	// To be removed when we upgrade this package.
+	.components-popover {
+		position: fixed;
+	}
+
+	.stripe-notifications-banner-wrapper {
+		padding-bottom: 0.25rem; // Stripe does it in their furever.dev site too so the border is visible.
+		overflow: hidden; // Stripe does it in their furever.dev site too so the border is visible.
+		margin-bottom: 24px;
+		margin-left: -1px; // For some reason we lack 1px left and right.
+		margin-right: -1px;
+	}
+
+	.stripe-notifications-banner-loader {
+		width: min( 680px, 90vw ); /* Keeps it 680px max but adapts */
+		height: 160px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.wcpay-setup-real-payments {
+		&__body {
+			display: grid;
+			grid-template-columns: repeat( 3, 1fr );
+			grid-column-gap: $gap-largest;
+			margin: $gap $gap-small;
+			text-align: center;
+			fill: $studio-woocommerce-purple-50;
+
+			@media ( max-width: 783px ) {
+				grid-template-columns: 1fr;
+			}
+
+			svg {
+				display: block;
+				margin: 0 auto $gap-smaller;
+			}
+		}
+
+		&__footer {
+			justify-content: end;
+		}
+	}
+}

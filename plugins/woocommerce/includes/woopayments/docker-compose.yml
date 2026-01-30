@@ -1,0 +1,49 @@
+volumes:
+  ## Kludge for not having the ./docker directory bound recursively
+  dockerdirectory:
+
+services:
+  wordpress:
+    build:
+      context: .
+      dockerfile: ./docker/wordpress_xdebug/Dockerfile
+      args:
+        - XDEBUG_REMOTE_PORT=9000 # IDE/Editor's listener port
+        - XDEBUG_START_WITH_REQUEST=trigger
+    container_name: woocommerce_payments_wordpress
+    image: woocommerce_payments_wordpress
+    restart: always
+    depends_on:
+      - db
+    links:
+      - db:mysql
+    ports:
+      - "8082:80"
+    env_file:
+      - default.env
+    volumes:
+      - ./docker/wordpress:/var/www/html/
+      - ./docker/mu-plugins:/var/www/html/wp-content/mu-plugins
+      - ./docker/logs/apache2/:/var/log/apache2
+      - .:/var/www/html/wp-content/plugins/woocommerce-payments
+      - ./docker/wc-payments-php.ini:/usr/local/etc/php/conf.d/wc-payments-php.ini
+      - dockerdirectory:/var/www/html/wp-content/plugins/woocommerce-payments/docker
+      - ./docker/bin:/var/scripts
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  db:
+    container_name: woocommerce_payments_mysql
+    image: mariadb:10.5.8
+    ports:
+      - "5678:3306"
+    env_file:
+      - default.env
+    volumes:
+      - ./docker/data:/var/lib/mysql
+  phpMyAdmin:
+    container_name: woocommerce_payments_phpmyadmin
+    image: phpmyadmin:latest
+    ports:
+      - "8083:80"
+    env_file:
+      - default.env

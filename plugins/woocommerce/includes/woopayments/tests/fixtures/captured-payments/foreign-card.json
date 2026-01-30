@@ -1,0 +1,55 @@
+{
+  "title": "Payment with foreign card",
+  "capturedEvent":
+    {
+      "type": "captured",
+      "amount": 1800,
+      "amount_captured": 1800,
+      "fee": 109,
+      "fee_rates": {
+        "percentage": 0.044,
+        "fixed": 30,
+        "fixed_currency": "USD",
+        "history": [
+          {
+            "type": "base",
+            "additional_type": "",
+            "fee_id": "base-us-card-fee",
+            "percentage_rate": 0.029,
+            "fixed_rate": 30,
+            "currency": "usd"
+          },
+          {
+            "type": "additional",
+            "additional_type": "international",
+            "fee_id": "additional-us-intl-fee",
+            "percentage_rate": 0.015,
+            "fixed_rate": 0,
+            "currency": "usd"
+          }
+        ]
+      },
+      "currency": "USD",
+      "datetime": 1736869781,
+      "deposit": null,
+      "transaction_id": "txn_3QhCN7R3NO9FvHYd0wKleSrw",
+      "transaction_details": {
+        "customer_currency": "USD",
+        "customer_amount": 1800,
+        "customer_amount_captured": 1800,
+        "customer_fee": 109,
+        "store_currency": "USD",
+        "store_amount": 1800,
+        "store_amount_captured": 1800,
+        "store_fee": 109
+      }
+    },
+  "expectation": {
+    "feeString": "Fee (4.4% + $0.30): -$1.09",
+    "feeBreakdown": {
+      "base": "Base fee: 2.9% + $0.30",
+      "additional-international": "International card fee: 1.5%"
+    },
+    "netString": "Net payout: $16.91 USD"
+  }
+}

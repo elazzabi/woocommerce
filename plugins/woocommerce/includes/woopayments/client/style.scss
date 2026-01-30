@@ -1,0 +1,173 @@
+@import './stylesheets/abstracts/colors';
+@import './stylesheets/abstracts/mixins';
+@import './stylesheets/abstracts/breakpoints';
+
+/* Fix top padding when layout breaks at 782px */
+.woocommerce-layout .woocommerce-layout__main {
+	@media screen and ( max-width: 782px ) {
+		padding-top: 16px;
+		padding-bottom: 16px;
+	}
+}
+
+.woocommerce-payments-page {
+	.components-card__body {
+		> *:first-child {
+			margin-top: 0;
+		}
+
+		> *:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+/**
+* This styling is for all `<TableCard />` components found in WooPayments screens.
+*/
+.woocommerce-payments-page .woocommerce-table {
+	.woocommerce-table__item {
+		white-space: nowrap;
+	}
+
+	.info-button {
+		width: 40px;
+		padding-right: 0;
+
+		> a {
+			height: 18px;
+			fill: $studio-gray-30;
+		}
+
+		+ .woocommerce-table__header {
+			border-left: none;
+		}
+
+		.is-placeholder {
+			display: none;
+		}
+	}
+
+	.payment-method__brand {
+		display: block;
+		margin: 0 auto;
+		text-align: center;
+	}
+}
+
+/**
+ * This styling changes the appearance of warning notices to match our designs.
+ * In particular it removes margins that aren't supposed to be present, and
+ * fixes the background color.
+ */
+.wcpay-test-mode-notice.components-notice.is-warning {
+	margin: 24px 0;
+	padding: 12px;
+	background-color: $studio-yellow-5;
+}
+
+.wcpay-test-mode-notice.components-notice.is-informational {
+	margin: 24px 0;
+	padding: 12px;
+}
+
+.wcpay-connect-error-notice.components-notice {
+	margin: 24px 0;
+	padding: 12px;
+}
+
+.payment-method-details {
+	display: flex;
+	align-items: flex-start;
+
+	@media screen and ( max-width: 1023px ) {
+		display: block;
+	}
+
+	&__column {
+		flex: 0 0 50%;
+	}
+
+	&-list-item {
+		display: inline-flex;
+	}
+}
+
+.payment-method-detail {
+	display: flex;
+	align-items: flex-start;
+	font-size: 14px;
+	line-height: 28px;
+
+	&__label {
+		margin: 0;
+		color: $studio-gray-60;
+		flex: 0 0 36%;
+		font-weight: normal;
+		line-height: 20px;
+		padding: 4px 0;
+
+		@media screen and ( max-width: 470px ) {
+			flex: 0 0 40%;
+		}
+	}
+
+	&__value {
+		margin: 0;
+		color: $studio-gray-80;
+		line-height: 20px;
+		padding: 4px 0;
+		word-break: break-word;
+	}
+}
+
+/**
+ * There is a bug with the Modal component that when the close X is hovered or focused, a tooltip
+ * appears outside of the view of the modal causing scrollbars. This is a work around to hide the
+ * tooltip until the bug is fixed.
+ * TODO: remove rule ones bug is closed
+ * https://github.com/WordPress/gutenberg/issues/15434
+ */
+.components-modal__content
+	.components-modal__header
+	.components-button
+	.components-tooltip {
+	display: none;
+}
+
+img {
+	&.payment-method__icon {
+		border: 1px solid rgba( 0, 0, 0, 0.25 );
+		border-radius: 4px;
+		display: block;
+
+		&.no-border {
+			border: none;
+			border-radius: 0;
+		}
+	}
+}
+
+/**
+ * This styling fixes the appearance of advanced filters on list screens.
+ * In particular, it adds a gap between advanced date filter inputs on viewports >= 783px.
+ * See https://github.com/woocommerce/woocommerce/blob/892afbe1b9ee7bd1d20e7c34ad6180d91b8b94d9/packages/js/components/src/advanced-filters/style.scss#L119
+ */
+.woocommerce-filters-deposits,
+.woocommerce-filters-disputes,
+.woocommerce-filters-documents,
+.woocommerce-filters-transactions {
+	@media screen and ( min-width: 783px ) {
+		.woocommerce-filters-advanced {
+			&__fieldset {
+				display: grid;
+				grid-template-columns: 100px auto 1fr;
+			}
+		}
+		.components-select-control
+			.components-input-control__container
+			.components-select-control__input {
+			padding-right: var( --main-gap );
+		}
+	}
+}

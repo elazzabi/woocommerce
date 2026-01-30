@@ -1,0 +1,160 @@
+@import '~@wordpress/components/src/tooltip/style.scss';
+
+$space-header-item: 12px;
+
+.transactions-list {
+	.date-time {
+		min-width: 195px;
+	}
+
+	.converted-amount {
+		display: flex; // Necessary for conversion tooltip to show.
+		justify-content: flex-end;
+
+		.conversion-indicator {
+			margin-right: 6px;
+			fill: $studio-gray-30;
+		}
+	}
+
+	// slight adjustment to align header items with sorting button to account for icon width
+	.woocommerce-table__header.is-numeric .components-button {
+		margin-right: $space-header-item;
+	}
+
+	.woocommerce-table__header.is-center-aligned {
+		text-align: center;
+	}
+
+	.woocommerce-taptopay__icon {
+		position: relative;
+		display: inline-block;
+		width: 16px;
+		height: 16px;
+		background: no-repeat
+			url( '../../../assets/images/payment-methods/taptopay.svg' );
+		background-size: 16px 16px;
+		transform: rotate( 45deg );
+		cursor: pointer;
+		top: 3px;
+		left: 8px;
+	}
+}
+
+/**
+ * Sourced from https://github.com/woocommerce/woocommerce-admin/blob/ec36a00b77b5c0e313985a5a64c88aaec9eb154e/client/analytics/components/report-table/style.scss.
+ * Depending on the wc-admin version, these styles are not loaded if not using the analytics report components, so they need to be included here.
+ * If we switch to the Report components, we can remove them from here, as they would be loaded by wc-admin.
+*/
+$gap: 16px;
+$gap-small: 12px;
+.woocommerce-report-table {
+	.woocommerce-search {
+		flex-grow: 1;
+	}
+
+	.woocommerce-card__header {
+		position: relative;
+	}
+
+	&.has-compare,
+	&.has-search {
+		.woocommerce-card__action {
+			align-items: center;
+			text-align: left;
+			display: grid;
+			width: 100%;
+			grid-template-columns: auto 1fr auto;
+		}
+
+		@include breakpoint( '<960px' ) {
+			.woocommerce-card__action {
+				grid-gap: $gap-small;
+				grid-template-columns: auto 1fr;
+				grid-row-start: 2;
+				grid-row-end: 2;
+				grid-column-start: 1;
+				grid-column-end: 4;
+				margin: 0;
+
+				.woocommerce-table__compare {
+					display: flex;
+				}
+
+				.woocommerce-search {
+					grid-area: 2 / 2 / 3 / 4;
+					margin-right: 0;
+				}
+			}
+		}
+
+		&.has-search:not( .has-compare ) {
+			.woocommerce-card__action {
+				grid-template-columns: 1fr auto;
+
+				.woocommerce-search {
+					align-self: center;
+					grid-column-start: 1;
+					grid-column-end: 2;
+				}
+			}
+
+			@include breakpoint( '<960px' ) {
+				.woocommerce-card__action {
+					grid-template-columns: auto;
+
+					.woocommerce-search {
+						grid-area: 2 / 1 / 3 / 4;
+						margin-left: 0;
+					}
+				}
+			}
+		}
+
+		.woocommerce-search {
+			margin: 0 $gap;
+
+			.components-base-control {
+				&.woocommerce-select-control__control {
+					min-height: 38px;
+					height: auto;
+					button.woocommerce-select-control__clear {
+						background-color: #fff;
+
+						&::before {
+							content: '';
+							position: absolute;
+							left: -30px;
+							top: -2px;
+							bottom: 0;
+							width: 30px;
+							height: 100%;
+							background: linear-gradient(
+								to right,
+								rgba( 255, 255, 255, 0 ),
+								rgba( 255, 255, 255, 1 ) 90%
+							);
+							pointer-events: none;
+						}
+					}
+				}
+			}
+		}
+
+		.woocommerce-compare-button {
+			padding: 3px $gap-small;
+			height: auto;
+		}
+	}
+}
+
+.components-snackbar-list {
+	@include breakpoint( '<660px' ) {
+		position: absolute;
+		left: $gap;
+		right: $gap;
+		bottom: 100%;
+		margin-bottom: $gap-small;
+		width: auto;
+	}
+}
